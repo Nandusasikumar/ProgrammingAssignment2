@@ -25,9 +25,6 @@ makeCacheMatrix <- function(x = matrix()) {
 ## If the inverse has already been calculated (and the matrix has not changed), then cacheSolve 
 ## should retrieve the inverse from the cache.  
 
-## This function creates a special "matrix" object that can cache its inverse.
-
-
 cacheSolve <- function(x, ...) {
   ## get the inverse of the input matrix and see if that object is NULL, If not null, then inverse it and return value.
   theinv <- x$getInverse()
