@@ -1,0 +1,17 @@
+{
+    "contents" : "## Code base for the assignment 2 for the Coursera R Programming course.\n## We are required to write 2 functions which shows the power of R to cache info so it can be looked up again and again\n## Even though i am an engineer by profession, it is been a while since i have dealt with matrices\n## Thought of adding this URL which would help to understand how/why we inverse a function\n## http://www.johnmyleswhite.com/notebook/2009/12/16/quick-review-of-matrix-algebra-in-r/\n\nmakeCacheMatrix <- function(x = matrix()) {\n  inv <- NULL\n  ## Returns another function so environments are scoped properly.\n  set <- function(y) {\n    x <<- y\n    inv <<- NULL\n  }\n  get <- function() x\n  setInverse <- function(inverse) inv <<- inverse\n  getInverse <- function() inv\n  ## creates a list with all getter and setter methods so we can use it elsewhere.\n  list(set = set,\n       get = get,\n       setInverse = setInverse,\n       getInverse = getInverse)\n}\n\n## Second function computes the inverse of the special \"matrix\" returned by makeCacheMatrix above. \n## If the inverse has already been calculated (and the matrix has not changed), then cacheSolve \n## should retrieve the inverse from the cache.  \n\n## This function creates a special \"matrix\" object that can cache its inverse.\n\n\ncacheSolve <- function(x, ...) {\n  ## get the inverse of the input matrix and see if that object is NULL, If not null, then inverse it and return value.\n  theinv <- x$getInverse()\n  if (!is.null(theinv)) {\n    message(\"Retreiving cached data\")\n    return(theinv)\n  }\n  ## No cache available so inverse it using solve and set the value in the cache. \n  ## There are other better methods for larger matrices,but solve would work for now..\n  thematrix <- x$get()\n  ## use solve to get the inverse \n  theinv <- solve(thematrix , ...)\n  x$setInverse(theinv)\n  theinv\n} \n",
+    "created" : 1450892182170.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2651889605",
+    "id" : "7E69234F",
+    "lastKnownWriteTime" : 1450900669,
+    "path" : "C:/Users/nandus/DS_Repos/ProgrammingAssignment2/cachematrix.R",
+    "project_path" : "cachematrix.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : true,
+    "type" : "r_source"
+}
